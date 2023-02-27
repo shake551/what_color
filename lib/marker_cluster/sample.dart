@@ -1,15 +1,18 @@
 import 'dart:async';
 import 'dart:ui';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_cluster_manager/google_maps_cluster_manager.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:what_color/marker_cluster/place.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -34,7 +37,7 @@ class MapSampleState extends State<MapSample> {
 
   final Completer<GoogleMapController> _controller = Completer();
 
-  Set<Marker> markers = Set();
+  Set<Marker> markers = {};
 
   final CameraPosition _parisCameraPosition =
       const CameraPosition(target: LatLng(48.856613, 2.352222), zoom: 12.0);
@@ -47,7 +50,7 @@ class MapSampleState extends State<MapSample> {
     for (int i = 0; i < 10; i++)
       Place(
           name: 'Restaurant $i',
-          isClosed: i % 2 == 0,
+          isClosed: i.isEven,
           latLng: LatLng(48.858265 - i * 0.001, 2.350107 + i * 0.001)),
     for (int i = 0; i < 10; i++)
       Place(
@@ -83,7 +86,9 @@ class MapSampleState extends State<MapSample> {
   }
 
   void _updateMarkers(Set<Marker> markers) {
-    print('Updated ${markers.length} markers');
+    if (kDebugMode) {
+      print('Updated ${markers.length} markers');
+    }
     setState(() {
       this.markers = markers;
     });
@@ -93,7 +98,6 @@ class MapSampleState extends State<MapSample> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: GoogleMap(
-          mapType: MapType.normal,
           initialCameraPosition: _parisCameraPosition,
           markers: markers,
           onMapCreated: (GoogleMapController controller) {
@@ -130,15 +134,15 @@ class MapSampleState extends State<MapSample> {
       };
 
   Future<BitmapDescriptor> _getMarkerBitmap(int count, {String? text}) async {
-    final PictureRecorder pictureRecorder = PictureRecorder();
-    final Canvas canvas = Canvas(pictureRecorder);
+    final pictureRecorder = PictureRecorder();
+    final canvas = Canvas(pictureRecorder);
 
     final paint = Paint();
 
-    double size = 20 * count.toDouble();
+    final size = 20 * count.toDouble();
 
     paint.color = Colors.transparent;
-    var rect = Rect.fromLTWH(0, 0, size, size);
+    final rect = Rect.fromLTWH(0, 0, size, size);
     canvas.drawRect(rect, paint);
 
     // 円（塗りつぶし）
