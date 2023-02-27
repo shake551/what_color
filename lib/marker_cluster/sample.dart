@@ -40,34 +40,40 @@ class MapSampleState extends State<MapSample> {
   Set<Marker> markers = {};
 
   final CameraPosition _parisCameraPosition =
-      const CameraPosition(target: LatLng(48.856613, 2.352222), zoom: 12.0);
+      const CameraPosition(target: LatLng(48.856613, 2.352222), zoom: 12);
 
   List<Place> items = [
     for (int i = 0; i < 10; i++)
       Place(
-          name: 'Place $i',
-          latLng: LatLng(48.848200 + i * 0.001, 2.319124 + i * 0.001)),
+        name: 'Place $i',
+        latLng: LatLng(48.848200 + i * 0.001, 2.319124 + i * 0.001),
+      ),
     for (int i = 0; i < 10; i++)
       Place(
-          name: 'Restaurant $i',
-          isClosed: i.isEven,
-          latLng: LatLng(48.858265 - i * 0.001, 2.350107 + i * 0.001)),
+        name: 'Restaurant $i',
+        isClosed: i.isEven,
+        latLng: LatLng(48.858265 - i * 0.001, 2.350107 + i * 0.001),
+      ),
     for (int i = 0; i < 10; i++)
       Place(
-          name: 'Bar $i',
-          latLng: LatLng(48.858265 + i * 0.01, 2.350107 - i * 0.01)),
+        name: 'Bar $i',
+        latLng: LatLng(48.858265 + i * 0.01, 2.350107 - i * 0.01),
+      ),
     for (int i = 0; i < 10; i++)
       Place(
-          name: 'Hotel $i',
-          latLng: LatLng(48.858265 - i * 0.1, 2.350107 - i * 0.01)),
+        name: 'Hotel $i',
+        latLng: LatLng(48.858265 - i * 0.1, 2.350107 - i * 0.01),
+      ),
     for (int i = 0; i < 10; i++)
       Place(
-          name: 'Test $i',
-          latLng: LatLng(66.160507 + i * 0.1, -153.369141 + i * 0.1)),
+        name: 'Test $i',
+        latLng: LatLng(66.160507 + i * 0.1, -153.369141 + i * 0.1),
+      ),
     for (int i = 0; i < 10; i++)
       Place(
-          name: 'Test2 $i',
-          latLng: LatLng(-36.848461 + i * 1, 169.763336 + i * 1)),
+        name: 'Test2 $i',
+        latLng: LatLng(-36.848461 + i * 1, 169.763336 + i * 1),
+      ),
   ];
 
   @override
@@ -98,21 +104,23 @@ class MapSampleState extends State<MapSample> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: GoogleMap(
-          initialCameraPosition: _parisCameraPosition,
-          markers: markers,
-          onMapCreated: (GoogleMapController controller) {
-            _controller.complete(controller);
-            _manager.setMapId(controller.mapId);
-          },
-          onCameraMove: _manager.onCameraMove,
-          onCameraIdle: _manager.updateMap),
+        initialCameraPosition: _parisCameraPosition,
+        markers: markers,
+        onMapCreated: (GoogleMapController controller) {
+          _controller.complete(controller);
+          _manager.setMapId(controller.mapId);
+        },
+        onCameraMove: _manager.onCameraMove,
+        onCameraIdle: _manager.updateMap,
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           _manager.setItems(<Place>[
             for (int i = 0; i < 30; i++)
               Place(
-                  name: 'New Place ${DateTime.now()} $i',
-                  latLng: LatLng(48.858265 + i * 0.01, 2.350107))
+                name: 'New Place ${DateTime.now()} $i',
+                latLng: LatLng(48.858265 + i * 0.01, 2.350107),
+              )
           ]);
         },
         child: const Icon(Icons.update),
@@ -128,8 +136,10 @@ class MapSampleState extends State<MapSample> {
           onTap: () {
             cluster.items.forEach((p) => print(p));
           },
-          icon: await _getMarkerBitmap(cluster.items.length,
-              text: cluster.isMultiple ? cluster.count.toString() : null),
+          icon: await _getMarkerBitmap(
+            cluster.items.length,
+            text: cluster.isMultiple ? cluster.count.toString() : null,
+          ),
         );
       };
 
