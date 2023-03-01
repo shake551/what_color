@@ -57,8 +57,6 @@ class ColorSelectState extends State<ColorSelect> {
               // selectedTags の中に自分がいるかを確かめる
               final isSelected = selectedTags.contains(color);
               return InkWell(
-                radius: 5,
-                // borderRadius: const BorderRadius.all(Radius.circular(32)),
                 onTap: () {
                   if (isSelected) {
                     // すでに選択されていれば取り除く
@@ -69,22 +67,28 @@ class ColorSelectState extends State<ColorSelect> {
                   }
                   setState(() {});
                 },
-                child: AnimatedContainer(
-                  width: 5,
-                  height: 5,
-                  duration: const Duration(milliseconds: 200),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 8,
-                  ),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      width: isSelected ? 10 : 1,
-                      color: Color.fromRGBO(color[0], color[1], color[2], 1),
+                child: Stack(
+                  children: [
+                    AnimatedContainer(
+                      duration: const Duration(milliseconds: 200),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 8,
+                      ),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Color.fromRGBO(color[0], color[1], color[2], 1),
+                      ),
                     ),
-                    color: Color.fromRGBO(color[0], color[1], color[2], 1),
-                  ),
+                    Align(
+                      child: isSelected
+                          ? const Icon(
+                              Icons.check,
+                              weight: 1000,
+                            )
+                          : null,
+                    ),
+                  ],
                 ),
               );
             }).toList(),
