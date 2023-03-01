@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const ColorSelect());
-}
-
 class ColorSelect extends StatefulWidget {
   const ColorSelect({super.key});
 
@@ -43,8 +39,7 @@ class ColorSelectState extends State<ColorSelect> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(title: const Text('複数選択できるタグ')),
         body: Padding(
           padding: const EdgeInsets.all(16),
@@ -92,7 +87,6 @@ class ColorSelectState extends State<ColorSelect> {
                 ),
               );
             }).toList(),
-          ),
         ),
       ),
     );
