@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:what_color/page/feel_form.dart';
 
 class ColorSelect extends StatefulWidget {
   const ColorSelect({super.key});
@@ -40,54 +41,87 @@ class ColorSelectState extends State<ColorSelect> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text('複数選択できるタグ')),
-        body: Padding(
-          padding: const EdgeInsets.all(16),
-          child: GridView.count(
-            crossAxisCount: 4,
-            padding: const EdgeInsets.all(50),
-            mainAxisSpacing: 30,
-            crossAxisSpacing: 30,
-            children: colors.map((color) {
-              // selectedTags の中に自分がいるかを確かめる
-              final isSelected = selectedTags.contains(color);
-              return InkWell(
-                onTap: () {
-                  if (isSelected) {
-                    // すでに選択されていれば取り除く
-                    selectedTags.remove(color);
-                  } else {
-                    // 選択されていなければ追加する
-                    selectedTags.add(color);
-                  }
-                  setState(() {});
-                },
-                child: Stack(
-                  children: [
-                    AnimatedContainer(
-                      duration: const Duration(milliseconds: 200),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 8,
-                      ),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Color.fromRGBO(color[0], color[1], color[2], 1),
-                      ),
+      appBar: AppBar(title: const Text('複数選択できるタグ')),
+      body: Column(
+        children: [
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: GridView.count(
+                crossAxisCount: 4,
+                padding: const EdgeInsets.all(50),
+                mainAxisSpacing: 30,
+                crossAxisSpacing: 30,
+                children: colors.map((color) {
+                  // selectedTags の中に自分がいるかを確かめる
+                  final isSelected = selectedTags.contains(color);
+                  return InkWell(
+                    onTap: () {
+                      if (isSelected) {
+                        // すでに選択されていれば取り除く
+                        selectedTags.remove(color);
+                      } else {
+                        // 選択されていなければ追加する
+                        selectedTags.add(color);
+                      }
+                      setState(() {});
+                    },
+                    child: Stack(
+                      children: [
+                        AnimatedContainer(
+                          duration: const Duration(milliseconds: 200),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 8,
+                          ),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color:
+                                Color.fromRGBO(color[0], color[1], color[2], 1),
+                          ),
+                        ),
+                        Align(
+                          child: isSelected
+                              ? const Icon(
+                                  Icons.check,
+                                  weight: 1000,
+                                )
+                              : null,
+                        ),
+                      ],
                     ),
-                    Align(
-                      child: isSelected
-                          ? const Icon(
-                              Icons.check,
-                              weight: 1000,
-                            )
-                          : null,
-                    ),
-                  ],
+                  );
+                }).toList(),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(100),
+            child: SizedBox(
+              width: 80,
+              height: 80,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.grey,
+                  shape: const CircleBorder(),
                 ),
-              );
-            }).toList(),
-        ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          FeelForm(selectedColors: selectedTags),
+                    ),
+                  );
+                },
+                child: const Icon(
+                  Icons.arrow_forward,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
