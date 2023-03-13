@@ -71,7 +71,7 @@ class ColorSelectState extends State<ColorSelect> {
                         AnimatedContainer(
                           duration: const Duration(milliseconds: 200),
                           padding: const EdgeInsets.symmetric(
-                            horizontal: 16,
+                            horizontal: 8,
                             vertical: 8,
                           ),
                           decoration: BoxDecoration(
@@ -96,7 +96,7 @@ class ColorSelectState extends State<ColorSelect> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(100),
+            padding: const EdgeInsets.all(30),
             child: SizedBox(
               width: 80,
               height: 80,
