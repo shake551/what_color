@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:what_color/domain/model/color_base.dart';
 
 class FeelForm extends StatefulWidget {
   const FeelForm({this.selectedColors, super.key});
 
-  final List<List<int>>? selectedColors;
+  final List<ColorBase>? selectedColors;
 
   @override
   State<StatefulWidget> createState() => FeelFormState();
@@ -12,6 +13,7 @@ class FeelForm extends StatefulWidget {
 class FeelFormState extends State<FeelForm> {
   @override
   Widget build(BuildContext context) {
+    final colorAverage = ColorBase.averageColor(widget.selectedColors);
     return Scaffold(
       appBar: AppBar(title: const Text('what color?')),
       resizeToAvoidBottomInset: false,
@@ -35,7 +37,7 @@ class FeelFormState extends State<FeelForm> {
                       height: 30,
                       margin: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
-                        color: Color.fromRGBO(color[0], color[1], color[2], 1),
+                        color: Color.fromRGBO(color.r, color.g, color.b, 1),
                         shape: BoxShape.circle,
                       ),
                     );
@@ -68,6 +70,18 @@ class FeelFormState extends State<FeelForm> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Color.fromRGBO(
+                      colorAverage.r,
+                      colorAverage.g,
+                      colorAverage.b,
+                      1,
+                    ),
+                    onPrimary: Colors.black,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
                   onPressed: () {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
@@ -75,7 +89,12 @@ class FeelFormState extends State<FeelForm> {
                       ),
                     );
                   },
-                  child: const Text('投稿する'),
+                  child: const Text(
+                    '投稿する',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
               ),
               SizedBox(

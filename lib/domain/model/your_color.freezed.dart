@@ -24,9 +24,7 @@ mixin _$YourColor {
   String get comment => throw _privateConstructorUsedError;
   double get latitude => throw _privateConstructorUsedError;
   double get longitude => throw _privateConstructorUsedError;
-  int get r => throw _privateConstructorUsedError;
-  int get g => throw _privateConstructorUsedError;
-  int get b => throw _privateConstructorUsedError;
+  ColorBase get color => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -44,9 +42,9 @@ abstract class $YourColorCopyWith<$Res> {
       String comment,
       double latitude,
       double longitude,
-      int r,
-      int g,
-      int b});
+      ColorBase color});
+
+  $ColorBaseCopyWith<$Res> get color;
 }
 
 /// @nodoc
@@ -66,9 +64,7 @@ class _$YourColorCopyWithImpl<$Res, $Val extends YourColor>
     Object? comment = null,
     Object? latitude = null,
     Object? longitude = null,
-    Object? r = null,
-    Object? g = null,
-    Object? b = null,
+    Object? color = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -87,19 +83,19 @@ class _$YourColorCopyWithImpl<$Res, $Val extends YourColor>
           ? _value.longitude
           : longitude // ignore: cast_nullable_to_non_nullable
               as double,
-      r: null == r
-          ? _value.r
-          : r // ignore: cast_nullable_to_non_nullable
-              as int,
-      g: null == g
-          ? _value.g
-          : g // ignore: cast_nullable_to_non_nullable
-              as int,
-      b: null == b
-          ? _value.b
-          : b // ignore: cast_nullable_to_non_nullable
-              as int,
+      color: null == color
+          ? _value.color
+          : color // ignore: cast_nullable_to_non_nullable
+              as ColorBase,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ColorBaseCopyWith<$Res> get color {
+    return $ColorBaseCopyWith<$Res>(_value.color, (value) {
+      return _then(_value.copyWith(color: value) as $Val);
+    });
   }
 }
 
@@ -115,9 +111,10 @@ abstract class _$$_YourColorCopyWith<$Res> implements $YourColorCopyWith<$Res> {
       String comment,
       double latitude,
       double longitude,
-      int r,
-      int g,
-      int b});
+      ColorBase color});
+
+  @override
+  $ColorBaseCopyWith<$Res> get color;
 }
 
 /// @nodoc
@@ -135,9 +132,7 @@ class __$$_YourColorCopyWithImpl<$Res>
     Object? comment = null,
     Object? latitude = null,
     Object? longitude = null,
-    Object? r = null,
-    Object? g = null,
-    Object? b = null,
+    Object? color = null,
   }) {
     return _then(_$_YourColor(
       null == id
@@ -156,18 +151,10 @@ class __$$_YourColorCopyWithImpl<$Res>
           ? _value.longitude
           : longitude // ignore: cast_nullable_to_non_nullable
               as double,
-      null == r
-          ? _value.r
-          : r // ignore: cast_nullable_to_non_nullable
-              as int,
-      null == g
-          ? _value.g
-          : g // ignore: cast_nullable_to_non_nullable
-              as int,
-      null == b
-          ? _value.b
-          : b // ignore: cast_nullable_to_non_nullable
-              as int,
+      null == color
+          ? _value.color
+          : color // ignore: cast_nullable_to_non_nullable
+              as ColorBase,
     ));
   }
 }
@@ -175,8 +162,8 @@ class __$$_YourColorCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_YourColor implements _YourColor {
-  const _$_YourColor(this.id, this.comment, this.latitude, this.longitude,
-      this.r, this.g, this.b);
+  const _$_YourColor(
+      this.id, this.comment, this.latitude, this.longitude, this.color);
 
   factory _$_YourColor.fromJson(Map<String, dynamic> json) =>
       _$$_YourColorFromJson(json);
@@ -190,15 +177,11 @@ class _$_YourColor implements _YourColor {
   @override
   final double longitude;
   @override
-  final int r;
-  @override
-  final int g;
-  @override
-  final int b;
+  final ColorBase color;
 
   @override
   String toString() {
-    return 'YourColor(id: $id, comment: $comment, latitude: $latitude, longitude: $longitude, r: $r, g: $g, b: $b)';
+    return 'YourColor(id: $id, comment: $comment, latitude: $latitude, longitude: $longitude, color: $color)';
   }
 
   @override
@@ -212,15 +195,13 @@ class _$_YourColor implements _YourColor {
                 other.latitude == latitude) &&
             (identical(other.longitude, longitude) ||
                 other.longitude == longitude) &&
-            (identical(other.r, r) || other.r == r) &&
-            (identical(other.g, g) || other.g == g) &&
-            (identical(other.b, b) || other.b == b));
+            (identical(other.color, color) || other.color == color));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, comment, latitude, longitude, r, g, b);
+      Object.hash(runtimeType, id, comment, latitude, longitude, color);
 
   @JsonKey(ignore: true)
   @override
@@ -242,9 +223,7 @@ abstract class _YourColor implements YourColor {
       final String comment,
       final double latitude,
       final double longitude,
-      final int r,
-      final int g,
-      final int b) = _$_YourColor;
+      final ColorBase color) = _$_YourColor;
 
   factory _YourColor.fromJson(Map<String, dynamic> json) =
       _$_YourColor.fromJson;
@@ -258,11 +237,7 @@ abstract class _YourColor implements YourColor {
   @override
   double get longitude;
   @override
-  int get r;
-  @override
-  int get g;
-  @override
-  int get b;
+  ColorBase get color;
   @override
   @JsonKey(ignore: true)
   _$$_YourColorCopyWith<_$_YourColor> get copyWith =>

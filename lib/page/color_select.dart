@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:what_color/domain/model/color_base.dart';
 import 'package:what_color/page/feel_form.dart';
 
 class ColorSelect extends StatefulWidget {
@@ -10,33 +11,33 @@ class ColorSelect extends StatefulWidget {
 
 class ColorSelectState extends State<ColorSelect> {
   final colors = [
-    [250, 120, 120],
-    [250, 145, 120],
-    [250, 170, 120],
-    [250, 195, 120],
-    [250, 220, 120],
-    [250, 230, 120],
-    [250, 250, 120],
-    [225, 250, 120],
-    [200, 250, 120],
-    [175, 250, 120],
-    [150, 250, 120],
-    [135, 250, 120],
-    [120, 250, 120],
-    [120, 250, 134],
-    [120, 250, 170],
-    [120, 250, 195],
-    [120, 250, 220],
-    [120, 250, 230],
-    [120, 250, 250],
-    [120, 225, 250],
-    [120, 200, 250],
-    [120, 175, 250],
-    [120, 150, 250],
-    [120, 120, 250],
+    const ColorBase(250, 120, 120),
+    const ColorBase(250, 145, 120),
+    const ColorBase(250, 170, 120),
+    const ColorBase(250, 195, 120),
+    const ColorBase(250, 220, 120),
+    const ColorBase(250, 230, 120),
+    const ColorBase(250, 250, 120),
+    const ColorBase(225, 250, 120),
+    const ColorBase(200, 250, 120),
+    const ColorBase(175, 250, 120),
+    const ColorBase(150, 250, 120),
+    const ColorBase(135, 250, 120),
+    const ColorBase(120, 250, 120),
+    const ColorBase(120, 250, 134),
+    const ColorBase(120, 250, 170),
+    const ColorBase(120, 250, 195),
+    const ColorBase(120, 250, 220),
+    const ColorBase(120, 250, 230),
+    const ColorBase(120, 250, 250),
+    const ColorBase(120, 225, 250),
+    const ColorBase(120, 200, 250),
+    const ColorBase(120, 175, 250),
+    const ColorBase(120, 150, 250),
+    const ColorBase(120, 120, 250),
   ];
 
-  List<List<int>> selectedTags = <List<int>>[];
+  List<ColorBase> selectedTags = <ColorBase>[];
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +78,7 @@ class ColorSelectState extends State<ColorSelect> {
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color:
-                                Color.fromRGBO(color[0], color[1], color[2], 1),
+                                Color.fromRGBO(color.r, color.g, color.b, 1),
                           ),
                         ),
                         Align(
