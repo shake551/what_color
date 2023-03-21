@@ -77,8 +77,7 @@ class ColorSelectState extends State<ColorSelect> {
                           ),
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color:
-                                Color.fromRGBO(color.r, color.g, color.b, 1),
+                            color: Color.fromRGBO(color.r, color.g, color.b, 1),
                           ),
                         ),
                         Align(
