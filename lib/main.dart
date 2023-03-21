@@ -1,38 +1,78 @@
+import 'dart:async';
+
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:what_color/page/component/footer.dart';
+import 'package:what_color/widget/google_sign_in_button.dart';
 
-void main() => runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  await initializeDateFormatting('ja').then((_) => runApp(const MyApp()));
+}
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  MyAppState createState() => MyAppState();
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      title: 'Flutter Demo',
+      home: MyHomePage(title: 'Flutter Demo Home Page'),
+    );
+  }
 }
 
-class MyAppState extends State<MyApp> {
-  late GoogleMapController mapController;
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({required this.title, super.key});
+  final String title;
 
-  final LatLng _center = const LatLng(45.521563, -122.677433);
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
 
-  void _onMapCreated(GoogleMapController controller) {
-    mapController = controller;
+class _MyHomePageState extends State<MyHomePage> {
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (FirebaseAuth.instance.currentUser != null) {
+      if (!context.mounted) return;
+      Future(() {
+        Navigator.push(
+          context,
+          // ignore: inference_failure_on_instance_creation
+          MaterialPageRoute(
+            builder: (context) => const Footer(),
+          ),
+        );
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Maps Sample App'),
-          backgroundColor: Colors.green[700],
-        ),
-        body: GoogleMap(
-          onMapCreated: _onMapCreated,
-          initialCameraPosition: CameraPosition(
-            target: _center,
-            zoom: 11,
-          ),
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              'What color',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 50,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 250),
+              child: const GoogleSignInButton(),
+            ),
+          ],
         ),
       ),
     );
