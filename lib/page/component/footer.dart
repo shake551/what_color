@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:what_color/marker_cluster/color_map.dart';
 import 'package:what_color/page/home.dart';
 
-
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
@@ -15,7 +14,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
 
 class Footer extends StatefulWidget {
   const Footer({super.key, this.param = 1});

@@ -18,5 +18,4 @@ class Navigate extends StatelessWidget {
       ),
     );
   }
-
 }
