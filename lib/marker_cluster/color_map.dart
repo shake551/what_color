@@ -4,85 +4,82 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_cluster_manager/google_maps_cluster_manager.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:what_color/domain/repository/your_color_repository.dart';
 import 'package:what_color/marker_cluster/place.dart';
 
-void main() => runApp(const MyApp());
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'Cluster Manager Demo',
-      home: MapSample(),
-    );
-  }
-}
-
-// Clustering maps
-
-class MapSample extends StatefulWidget {
-  const MapSample({super.key});
+class ColorMap extends StatefulWidget {
+  const ColorMap({super.key});
 
   @override
-  State<MapSample> createState() => MapSampleState();
+  State<ColorMap> createState() => ColorMapState();
 }
 
-class MapSampleState extends State<MapSample> {
+class ColorMapState extends State<ColorMap> {
   late ClusterManager _manager;
 
   final Completer<GoogleMapController> _controller = Completer();
 
   Set<Marker> markers = {};
+  List<Place> items = [];
 
-  final CameraPosition _parisCameraPosition =
-      const CameraPosition(target: LatLng(48.856613, 2.352222), zoom: 12);
+  Position? currentPosition;
+  late StreamSubscription<Position> positionStream;
 
-  List<Place> items = [
-    for (int i = 0; i < 10; i++)
-      Place(
-        name: 'Place $i',
-        latLng: LatLng(48.848200 + i * 0.001, 2.319124 + i * 0.001),
-      ),
-    for (int i = 0; i < 10; i++)
-      Place(
-        name: 'Restaurant $i',
-        isClosed: i.isEven,
-        latLng: LatLng(48.858265 - i * 0.001, 2.350107 + i * 0.001),
-      ),
-    for (int i = 0; i < 10; i++)
-      Place(
-        name: 'Bar $i',
-        latLng: LatLng(48.858265 + i * 0.01, 2.350107 - i * 0.01),
-      ),
-    for (int i = 0; i < 10; i++)
-      Place(
-        name: 'Hotel $i',
-        latLng: LatLng(48.858265 - i * 0.1, 2.350107 - i * 0.01),
-      ),
-    for (int i = 0; i < 10; i++)
-      Place(
-        name: 'Test $i',
-        latLng: LatLng(66.160507 + i * 0.1, -153.369141 + i * 0.1),
-      ),
-    for (int i = 0; i < 10; i++)
-      Place(
-        name: 'Test2 $i',
-        latLng: LatLng(-36.848461 + i * 1, 169.763336 + i * 1),
-      ),
-  ];
+  //初期位置
+  final CameraPosition _kGooglePlex = const CameraPosition(
+    target: LatLng(43.0686606, 141.3485613),
+    zoom: 14,
+  );
+
+  final LocationSettings locationSettings = const LocationSettings(
+    accuracy: LocationAccuracy.high,
+    distanceFilter: 100,
+  );
 
   @override
   void initState() {
-    _manager = _initClusterManager();
+    //位置情報が許可されていない時に許可をリクエストする
+    Future(() async {
+      final permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied) {
+        await Geolocator.requestPermission();
+      }
+    });
+
+    Future(() async {
+      await _setClusterItem();
+      _manager = _initClusterManager();
+    });
+
+    //現在位置を更新し続ける
+    positionStream =
+        Geolocator.getPositionStream(locationSettings: locationSettings)
+            .listen((Position? position) {
+      currentPosition = position;
+      if (kDebugMode) {
+        print(
+          position == null
+              ? 'Unknown'
+              : '${position.latitude}, '
+                  '${position.longitude}',
+        );
+      }
+    });
+
     super.initState();
   }
 
-  ClusterManager _initClusterManager() {
+  Future<void> _setClusterItem() async {
+    final yourColorList = await YourColorRepository.getYourColor();
+    setState(() {
+      items = Place.fromYourColorList(yourColorList);
+    });
+  }
+
+  ClusterManager<ClusterItem> _initClusterManager() {
     return ClusterManager<Place>(
       items,
       _updateMarkers,
@@ -101,10 +98,29 @@ class MapSampleState extends State<MapSample> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    positionStream.cancel();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    if (items.isEmpty) {
+      return Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              CircularProgressIndicator(),
+            ],
+          ),
+        ),
+      );
+    }
     return Scaffold(
       body: GoogleMap(
-        initialCameraPosition: _parisCameraPosition,
+        initialCameraPosition: _kGooglePlex,
+        myLocationEnabled: true,
         markers: markers,
         onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);
@@ -112,18 +128,6 @@ class MapSampleState extends State<MapSample> {
         },
         onCameraMove: _manager.onCameraMove,
         onCameraIdle: _manager.updateMap,
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _manager.setItems(<Place>[
-            for (int i = 0; i < 30; i++)
-              Place(
-                name: 'New Place ${DateTime.now()} $i',
-                latLng: LatLng(48.858265 + i * 0.01, 2.350107),
-              )
-          ]);
-        },
-        child: const Icon(Icons.update),
       ),
     );
   }
@@ -133,9 +137,6 @@ class MapSampleState extends State<MapSample> {
         return Marker(
           markerId: MarkerId(cluster.getId()),
           position: cluster.location,
-          onTap: () {
-            cluster.items.forEach((p) => print(p));
-          },
           icon: await _getMarkerBitmap(
             cluster.items.length,
             text: cluster.isMultiple ? cluster.count.toString() : null,

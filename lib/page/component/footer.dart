@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:what_color/marker_cluster/sample.dart';
+import 'package:what_color/marker_cluster/color_map.dart';
 import 'package:what_color/page/home.dart';
 
 
@@ -28,7 +28,7 @@ class Footer extends StatefulWidget {
 
 class _FooterState extends State<Footer> {
   List<Widget> display = [
-    const MapSample(),
+    const ColorMap(),
     Home(),
     Home(),
   ];
