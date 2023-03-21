@@ -14,6 +14,7 @@ class FeelFormState extends State<FeelForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('what color?')),
+      resizeToAvoidBottomInset: false,
       body: Padding(
         padding: const EdgeInsets.all(30),
         child: SingleChildScrollView(
@@ -76,6 +77,9 @@ class FeelFormState extends State<FeelForm> {
                   },
                   child: const Text('投稿する'),
                 ),
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).viewInsets.bottom,
               ),
             ],
           ),
