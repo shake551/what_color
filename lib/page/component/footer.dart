@@ -27,8 +27,8 @@ class Footer extends StatefulWidget {
 class _FooterState extends State<Footer> {
   List<Widget> display = [
     const ColorMap(),
-    Home(),
-    Home(),
+    const Home(),
+    const Home(),
   ];
 
   late int selectedIndex = widget.param;

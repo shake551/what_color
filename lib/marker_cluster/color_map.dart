@@ -7,9 +7,9 @@ import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_cluster_manager/google_maps_cluster_manager.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:what_color/domain/model/cluster_place.dart';
 import 'package:what_color/domain/model/color_base.dart';
 import 'package:what_color/domain/repository/your_color_repository.dart';
-import 'package:what_color/marker_cluster/place.dart';
 
 class ColorMap extends StatefulWidget {
   const ColorMap({super.key});
@@ -24,7 +24,7 @@ class ColorMapState extends State<ColorMap> {
   final Completer<GoogleMapController> _controller = Completer();
 
   Set<Marker> markers = {};
-  List<Place> items = [];
+  List<ClusterPlace> items = [];
 
   Position? currentPosition;
   late StreamSubscription<Position> positionStream;
@@ -76,12 +76,12 @@ class ColorMapState extends State<ColorMap> {
   Future<void> _setClusterItem() async {
     final yourColorList = await YourColorRepository.getYourColor();
     setState(() {
-      items = Place.fromYourColorList(yourColorList);
+      items = ClusterPlace.fromYourColorList(yourColorList);
     });
   }
 
   ClusterManager<ClusterItem> _initClusterManager() {
-    return ClusterManager<Place>(
+    return ClusterManager<ClusterPlace>(
       items,
       _updateMarkers,
       markerBuilder: _markerBuilder,
@@ -133,7 +133,7 @@ class ColorMapState extends State<ColorMap> {
     );
   }
 
-  Future<Marker> Function(Cluster<Place>) get _markerBuilder =>
+  Future<Marker> Function(Cluster<ClusterPlace>) get _markerBuilder =>
       (cluster) async {
         return Marker(
           markerId: MarkerId(cluster.getId()),
@@ -146,7 +146,7 @@ class ColorMapState extends State<ColorMap> {
       };
 
   Future<BitmapDescriptor> _getMarkerBitmap(
-    Cluster<Place> placeCluster,
+    Cluster<ClusterPlace> placeCluster,
     int count,
   ) async {
     final pictureRecorder = PictureRecorder();

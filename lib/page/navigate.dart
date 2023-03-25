@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:what_color/page/color_select.dart';
 
 class Navigate extends StatelessWidget {
+  const Navigate({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
