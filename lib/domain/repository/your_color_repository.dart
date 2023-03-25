@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:what_color/domain/model/color_base.dart';
 import 'package:what_color/domain/model/your_color.dart';
 
 class YourColorRepository {
@@ -7,5 +8,23 @@ class YourColorRepository {
         await FirebaseFirestore.instance.collection('your_color').get();
 
     return YourColor.fromFirestoreList(snapshot.docs);
+  }
+
+  static void create(
+    String comment,
+    double latitude,
+    double longitude,
+    ColorBase color,
+  ) {
+    final newYourColor = {
+      'comment': comment,
+      'latitude': latitude,
+      'longitude': longitude,
+      'color': color.toJson()
+    };
+
+    FirebaseFirestore.instance
+        .collection('your_color')
+        .add(newYourColor);
   }
 }
