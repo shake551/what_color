@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:what_color/page/navigate.dart';
 
 void main() {
-  runApp(Home());
+  runApp(const Home());
 }
 
 class Home extends StatelessWidget {

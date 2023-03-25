@@ -98,11 +98,10 @@ class FeelFormState extends State<FeelForm> {
                       position.longitude,
                       colorAverage,
                     );
-                    Navigator.push(
+                    await Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) =>
-                            const Home(),
+                        builder: (context) => const Home(),
                       ),
                     );
                   },

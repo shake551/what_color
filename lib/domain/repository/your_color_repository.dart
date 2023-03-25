@@ -23,8 +23,6 @@ class YourColorRepository {
       'color': color.toJson()
     };
 
-    FirebaseFirestore.instance
-        .collection('your_color')
-        .add(newYourColor);
+    FirebaseFirestore.instance.collection('your_color').add(newYourColor);
   }
 }
