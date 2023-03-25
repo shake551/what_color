@@ -71,13 +71,13 @@ class FeelFormState extends State<FeelForm> {
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: Color.fromRGBO(
+                    backgroundColor: Color.fromRGBO(
                       colorAverage.r,
                       colorAverage.g,
                       colorAverage.b,
                       1,
                     ),
-                    onPrimary: Colors.black,
+                    foregroundColor: Colors.black,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),

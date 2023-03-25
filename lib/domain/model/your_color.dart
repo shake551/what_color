@@ -8,8 +8,13 @@ part 'your_color.g.dart';
 
 @freezed
 class YourColor with _$YourColor {
-  const factory YourColor(String id, String comment, double latitude,
-      double longitude, ColorBase color) = _YourColor;
+  const factory YourColor(
+    String id,
+    String comment,
+    double latitude,
+    double longitude,
+    ColorBase color,
+  ) = _YourColor;
 
   factory YourColor.fromJson(Map<String, dynamic> json) =>
       _$YourColorFromJson(json);

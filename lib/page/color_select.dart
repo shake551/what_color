@@ -102,7 +102,7 @@ class ColorSelectState extends State<ColorSelect> {
               height: 80,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.grey,
+                  backgroundColor: Colors.grey,
                   shape: const CircleBorder(),
                 ),
                 onPressed: () {

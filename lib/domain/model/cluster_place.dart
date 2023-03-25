@@ -3,8 +3,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:what_color/domain/model/color_base.dart';
 import 'package:what_color/domain/model/your_color.dart';
 
-class Place with ClusterItem {
-  Place({
+class ClusterPlace with ClusterItem {
+  ClusterPlace({
     required this.name,
     required this.latLng,
     required this.color,
@@ -24,8 +24,8 @@ class Place with ClusterItem {
   @override
   LatLng get location => latLng;
 
-  static Place fromYourColor(YourColor yourColor) {
-    return Place(
+  static ClusterPlace fromYourColor(YourColor yourColor) {
+    return ClusterPlace(
       name: yourColor.id,
       latLng: LatLng(
         yourColor.latitude,
@@ -35,10 +35,10 @@ class Place with ClusterItem {
     );
   }
 
-  static List<Place> fromYourColorList(List<YourColor> yourColorList) {
-    final placeList = <Place>[];
+  static List<ClusterPlace> fromYourColorList(List<YourColor> yourColorList) {
+    final placeList = <ClusterPlace>[];
     for (final ele in yourColorList) {
-      placeList.add(Place.fromYourColor(ele));
+      placeList.add(ClusterPlace.fromYourColor(ele));
     }
 
     return placeList;
