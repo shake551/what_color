@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:what_color/domain/model/color_base.dart';
+import 'package:what_color/domain/repository/your_color_repository.dart';
+import 'package:what_color/page/home.dart';
 
 class FeelForm extends StatefulWidget {
   const FeelForm({this.selectedColors, super.key});
@@ -11,6 +14,8 @@ class FeelForm extends StatefulWidget {
 }
 
 class FeelFormState extends State<FeelForm> {
+  String comment = '';
+
   @override
   Widget build(BuildContext context) {
     final colorAverage = ColorBase.averageColor(widget.selectedColors);
@@ -66,6 +71,9 @@ class FeelFormState extends State<FeelForm> {
                     ),
                   ),
                 ),
+                onChanged: (value) {
+                  comment = value;
+                },
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16),
@@ -82,10 +90,18 @@ class FeelFormState extends State<FeelForm> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Processing Data'),
+                  onPressed: () async {
+                    final position = await Geolocator.getCurrentPosition();
+                    YourColorRepository.create(
+                      comment,
+                      position.latitude,
+                      position.longitude,
+                      colorAverage,
+                    );
+                    await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const Home(),
                       ),
                     );
                   },
