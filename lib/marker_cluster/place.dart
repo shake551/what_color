@@ -1,13 +1,20 @@
 import 'package:google_maps_cluster_manager/google_maps_cluster_manager.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:what_color/domain/model/color_base.dart';
 import 'package:what_color/domain/model/your_color.dart';
 
 class Place with ClusterItem {
-  Place({required this.name, required this.latLng, this.isClosed = false});
+  Place({
+    required this.name,
+    required this.latLng,
+    required this.color,
+    this.isClosed = false,
+  });
 
   final String name;
   final bool isClosed;
   final LatLng latLng;
+  final ColorBase color;
 
   @override
   String toString() {
@@ -24,6 +31,7 @@ class Place with ClusterItem {
         yourColor.latitude,
         yourColor.longitude,
       ),
+      color: yourColor.color,
     );
   }
 
