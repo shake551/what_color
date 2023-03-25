@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_cluster_manager/google_maps_cluster_manager.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:what_color/domain/model/color_base.dart';
 import 'package:what_color/domain/repository/your_color_repository.dart';
 import 'package:what_color/marker_cluster/place.dart';
 
@@ -138,13 +139,16 @@ class ColorMapState extends State<ColorMap> {
           markerId: MarkerId(cluster.getId()),
           position: cluster.location,
           icon: await _getMarkerBitmap(
+            cluster,
             cluster.items.length,
-            text: cluster.isMultiple ? cluster.count.toString() : null,
           ),
         );
       };
 
-  Future<BitmapDescriptor> _getMarkerBitmap(int count, {String? text}) async {
+  Future<BitmapDescriptor> _getMarkerBitmap(
+    Cluster<Place> placeCluster,
+    int count,
+  ) async {
     final pictureRecorder = PictureRecorder();
     final canvas = Canvas(pictureRecorder);
 
@@ -157,7 +161,16 @@ class ColorMapState extends State<ColorMap> {
     canvas.drawRect(rect, paint);
 
     // 円（塗りつぶし）
-    paint.color = Colors.pink.withOpacity(0.5);
+    final baseColorList = <ColorBase>[];
+
+    for (final element in placeCluster.items) {
+      baseColorList.add(element.color);
+    }
+
+    final averageColor = ColorBase.averageColor(baseColorList);
+    paint.color =
+        Color.fromRGBO(averageColor.r, averageColor.g, averageColor.b, 1)
+            .withOpacity(0.8);
     canvas.drawCircle(Offset(size / 2, size / 2), size / 2, paint);
 
     final img = await pictureRecorder
