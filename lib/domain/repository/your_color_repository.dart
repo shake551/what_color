@@ -34,6 +34,7 @@ class YourColorRepository {
     final snapshot = await FirebaseFirestore.instance
         .collection('your_color')
         .where('userId', isEqualTo: userID)
+        .orderBy('createdAt', descending: true)
         .get();
 
     return YourColor.fromFirestoreList(snapshot.docs);
