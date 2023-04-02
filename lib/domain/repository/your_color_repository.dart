@@ -22,7 +22,9 @@ class YourColorRepository {
       'comment': comment,
       'latitude': latitude,
       'longitude': longitude,
-      'color': color.toJson()
+      'color': color.toJson(),
+      'createdAt': DateTime.now().toString(),
+      'updatedAt': DateTime.now().toString(),
     };
 
     FirebaseFirestore.instance.collection('your_color').add(newYourColor);
