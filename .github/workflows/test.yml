@@ -2,7 +2,7 @@ name: Flutter Test
 on: [ pull_request ]
 
 env:
-  FLUTTER_VERSION: '2.5.3'
+  FLUTTER_VERSION: '3.7.1'
 
 jobs:
   test:
