@@ -1,6 +1,8 @@
 pre-commit:
   parallel: false
   commands:
+    test:
+      run: flutter test
     linter:
       run: dart fix --apply lib && git add {staged_files}
     formatter:
