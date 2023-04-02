@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:what_color/page/navigate.dart';
+import 'package:what_color/widget/your_color_list.dart';
 
 void main() {
   runApp(const Home());
@@ -10,8 +11,20 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Navigate(),
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('What Color?'),
+        ),
+        body: Column(
+          children: const [
+            Expanded(
+              child: YourColorList(),
+            ),
+            Navigate(),
+          ],
+        ),
+      ),
     );
   }
 }

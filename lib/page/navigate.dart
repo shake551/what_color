@@ -6,17 +6,15 @@ class Navigate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: ElevatedButton(
-          child: const Text('次へ'),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const ColorSelect()),
-            );
-          },
-        ),
+    return Center(
+      child: ElevatedButton(
+        child: const Text('次へ'),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const ColorSelect()),
+          );
+        },
       ),
     );
   }
