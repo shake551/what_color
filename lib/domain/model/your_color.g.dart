@@ -13,6 +13,8 @@ _$_YourColor _$$_YourColorFromJson(Map<String, dynamic> json) => _$_YourColor(
       (json['latitude'] as num).toDouble(),
       (json['longitude'] as num).toDouble(),
       ColorBase.fromJson(json['color'] as Map<String, dynamic>),
+      DateTime.parse(json['createdAt'] as String),
+      DateTime.parse(json['updatedAt'] as String),
     );
 
 Map<String, dynamic> _$$_YourColorToJson(_$_YourColor instance) =>
@@ -23,4 +25,6 @@ Map<String, dynamic> _$$_YourColorToJson(_$_YourColor instance) =>
       'latitude': instance.latitude,
       'longitude': instance.longitude,
       'color': instance.color,
+      'createdAt': instance.createdAt.toIso8601String(),
+      'updatedAt': instance.updatedAt.toIso8601String(),
     };

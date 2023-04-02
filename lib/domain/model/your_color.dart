@@ -15,6 +15,8 @@ class YourColor with _$YourColor {
     double latitude,
     double longitude,
     ColorBase color,
+    DateTime createdAt,
+    DateTime updatedAt,
   ) = _YourColor;
 
   factory YourColor.fromJson(Map<String, dynamic> json) =>
