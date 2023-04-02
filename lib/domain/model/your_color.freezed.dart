@@ -21,6 +21,7 @@ YourColor _$YourColorFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$YourColor {
   String get id => throw _privateConstructorUsedError;
+  String get userId => throw _privateConstructorUsedError;
   String get comment => throw _privateConstructorUsedError;
   double get latitude => throw _privateConstructorUsedError;
   double get longitude => throw _privateConstructorUsedError;
@@ -39,6 +40,7 @@ abstract class $YourColorCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
+      String userId,
       String comment,
       double latitude,
       double longitude,
@@ -61,6 +63,7 @@ class _$YourColorCopyWithImpl<$Res, $Val extends YourColor>
   @override
   $Res call({
     Object? id = null,
+    Object? userId = null,
     Object? comment = null,
     Object? latitude = null,
     Object? longitude = null,
@@ -70,6 +73,10 @@ class _$YourColorCopyWithImpl<$Res, $Val extends YourColor>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as String,
       comment: null == comment
           ? _value.comment
@@ -108,6 +115,7 @@ abstract class _$$_YourColorCopyWith<$Res> implements $YourColorCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
+      String userId,
       String comment,
       double latitude,
       double longitude,
@@ -129,6 +137,7 @@ class __$$_YourColorCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? userId = null,
     Object? comment = null,
     Object? latitude = null,
     Object? longitude = null,
@@ -138,6 +147,10 @@ class __$$_YourColorCopyWithImpl<$Res>
       null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as String,
       null == comment
           ? _value.comment
@@ -162,14 +175,16 @@ class __$$_YourColorCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_YourColor implements _YourColor {
-  const _$_YourColor(
-      this.id, this.comment, this.latitude, this.longitude, this.color);
+  const _$_YourColor(this.id, this.userId, this.comment, this.latitude,
+      this.longitude, this.color);
 
   factory _$_YourColor.fromJson(Map<String, dynamic> json) =>
       _$$_YourColorFromJson(json);
 
   @override
   final String id;
+  @override
+  final String userId;
   @override
   final String comment;
   @override
@@ -181,7 +196,7 @@ class _$_YourColor implements _YourColor {
 
   @override
   String toString() {
-    return 'YourColor(id: $id, comment: $comment, latitude: $latitude, longitude: $longitude, color: $color)';
+    return 'YourColor(id: $id, userId: $userId, comment: $comment, latitude: $latitude, longitude: $longitude, color: $color)';
   }
 
   @override
@@ -190,6 +205,7 @@ class _$_YourColor implements _YourColor {
         (other.runtimeType == runtimeType &&
             other is _$_YourColor &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.comment, comment) || other.comment == comment) &&
             (identical(other.latitude, latitude) ||
                 other.latitude == latitude) &&
@@ -201,7 +217,7 @@ class _$_YourColor implements _YourColor {
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, comment, latitude, longitude, color);
+      Object.hash(runtimeType, id, userId, comment, latitude, longitude, color);
 
   @JsonKey(ignore: true)
   @override
@@ -220,6 +236,7 @@ class _$_YourColor implements _YourColor {
 abstract class _YourColor implements YourColor {
   const factory _YourColor(
       final String id,
+      final String userId,
       final String comment,
       final double latitude,
       final double longitude,
@@ -230,6 +247,8 @@ abstract class _YourColor implements YourColor {
 
   @override
   String get id;
+  @override
+  String get userId;
   @override
   String get comment;
   @override
