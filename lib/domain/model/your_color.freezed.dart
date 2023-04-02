@@ -26,6 +26,8 @@ mixin _$YourColor {
   double get latitude => throw _privateConstructorUsedError;
   double get longitude => throw _privateConstructorUsedError;
   ColorBase get color => throw _privateConstructorUsedError;
+  DateTime get createdAt => throw _privateConstructorUsedError;
+  DateTime get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -44,7 +46,9 @@ abstract class $YourColorCopyWith<$Res> {
       String comment,
       double latitude,
       double longitude,
-      ColorBase color});
+      ColorBase color,
+      DateTime createdAt,
+      DateTime updatedAt});
 
   $ColorBaseCopyWith<$Res> get color;
 }
@@ -68,6 +72,8 @@ class _$YourColorCopyWithImpl<$Res, $Val extends YourColor>
     Object? latitude = null,
     Object? longitude = null,
     Object? color = null,
+    Object? createdAt = null,
+    Object? updatedAt = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -94,6 +100,14 @@ class _$YourColorCopyWithImpl<$Res, $Val extends YourColor>
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
               as ColorBase,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ) as $Val);
   }
 
@@ -119,7 +133,9 @@ abstract class _$$_YourColorCopyWith<$Res> implements $YourColorCopyWith<$Res> {
       String comment,
       double latitude,
       double longitude,
-      ColorBase color});
+      ColorBase color,
+      DateTime createdAt,
+      DateTime updatedAt});
 
   @override
   $ColorBaseCopyWith<$Res> get color;
@@ -142,6 +158,8 @@ class __$$_YourColorCopyWithImpl<$Res>
     Object? latitude = null,
     Object? longitude = null,
     Object? color = null,
+    Object? createdAt = null,
+    Object? updatedAt = null,
   }) {
     return _then(_$_YourColor(
       null == id
@@ -168,6 +186,14 @@ class __$$_YourColorCopyWithImpl<$Res>
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
               as ColorBase,
+      null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -176,7 +202,7 @@ class __$$_YourColorCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_YourColor implements _YourColor {
   const _$_YourColor(this.id, this.userId, this.comment, this.latitude,
-      this.longitude, this.color);
+      this.longitude, this.color, this.createdAt, this.updatedAt);
 
   factory _$_YourColor.fromJson(Map<String, dynamic> json) =>
       _$$_YourColorFromJson(json);
@@ -193,10 +219,14 @@ class _$_YourColor implements _YourColor {
   final double longitude;
   @override
   final ColorBase color;
+  @override
+  final DateTime createdAt;
+  @override
+  final DateTime updatedAt;
 
   @override
   String toString() {
-    return 'YourColor(id: $id, userId: $userId, comment: $comment, latitude: $latitude, longitude: $longitude, color: $color)';
+    return 'YourColor(id: $id, userId: $userId, comment: $comment, latitude: $latitude, longitude: $longitude, color: $color, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -211,13 +241,17 @@ class _$_YourColor implements _YourColor {
                 other.latitude == latitude) &&
             (identical(other.longitude, longitude) ||
                 other.longitude == longitude) &&
-            (identical(other.color, color) || other.color == color));
+            (identical(other.color, color) || other.color == color) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, userId, comment, latitude, longitude, color);
+  int get hashCode => Object.hash(runtimeType, id, userId, comment, latitude,
+      longitude, color, createdAt, updatedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -240,7 +274,9 @@ abstract class _YourColor implements YourColor {
       final String comment,
       final double latitude,
       final double longitude,
-      final ColorBase color) = _$_YourColor;
+      final ColorBase color,
+      final DateTime createdAt,
+      final DateTime updatedAt) = _$_YourColor;
 
   factory _YourColor.fromJson(Map<String, dynamic> json) =
       _$_YourColor.fromJson;
@@ -257,6 +293,10 @@ abstract class _YourColor implements YourColor {
   double get longitude;
   @override
   ColorBase get color;
+  @override
+  DateTime get createdAt;
+  @override
+  DateTime get updatedAt;
   @override
   @JsonKey(ignore: true)
   _$$_YourColorCopyWith<_$_YourColor> get copyWith =>
