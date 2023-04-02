@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:what_color/domain/model/color_base.dart';
@@ -93,6 +94,7 @@ class FeelFormState extends State<FeelForm> {
                   onPressed: () async {
                     final position = await Geolocator.getCurrentPosition();
                     YourColorRepository.create(
+                      FirebaseAuth.instance.currentUser!.uid,
                       comment,
                       position.latitude,
                       position.longitude,

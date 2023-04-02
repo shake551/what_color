@@ -11,12 +11,14 @@ class YourColorRepository {
   }
 
   static void create(
+    String userId,
     String comment,
     double latitude,
     double longitude,
     ColorBase color,
   ) {
     final newYourColor = {
+      'userId': userId,
       'comment': comment,
       'latitude': latitude,
       'longitude': longitude,
@@ -24,5 +26,14 @@ class YourColorRepository {
     };
 
     FirebaseFirestore.instance.collection('your_color').add(newYourColor);
+  }
+
+  static Future<List<YourColor>> getYourColorByUserID(String userID) async {
+    final snapshot = await FirebaseFirestore.instance
+        .collection('your_color')
+        .where('userId', isEqualTo: userID)
+        .get();
+
+    return YourColor.fromFirestoreList(snapshot.docs);
   }
 }

@@ -10,6 +10,7 @@ part 'your_color.g.dart';
 class YourColor with _$YourColor {
   const factory YourColor(
     String id,
+    String userId,
     String comment,
     double latitude,
     double longitude,

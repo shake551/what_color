@@ -8,6 +8,7 @@ part of 'your_color.dart';
 
 _$_YourColor _$$_YourColorFromJson(Map<String, dynamic> json) => _$_YourColor(
       json['id'] as String,
+      json['userId'] as String,
       json['comment'] as String,
       (json['latitude'] as num).toDouble(),
       (json['longitude'] as num).toDouble(),
@@ -17,6 +18,7 @@ _$_YourColor _$$_YourColorFromJson(Map<String, dynamic> json) => _$_YourColor(
 Map<String, dynamic> _$$_YourColorToJson(_$_YourColor instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'userId': instance.userId,
       'comment': instance.comment,
       'latitude': instance.latitude,
       'longitude': instance.longitude,
