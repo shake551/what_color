@@ -36,7 +36,7 @@ class FeelFormState extends State<FeelForm> {
                 ),
               ),
               if (widget.selectedColors != null)
-                Row(
+                Wrap(
                   children: widget.selectedColors!.map((color) {
                     return Container(
                       width: 30,
