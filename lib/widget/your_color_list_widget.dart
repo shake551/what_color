@@ -1,26 +1,12 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:what_color/domain/model/your_color.dart';
-import 'package:what_color/domain/repository/your_color_repository.dart';
 
-class YourColorList extends StatefulWidget {
-  const YourColorList({super.key});
+class YourColorListWidget extends StatelessWidget {
+  YourColorListWidget({required this.feelList, super.key});
 
-  @override
-  State<StatefulWidget> createState() => YourColorListState();
-}
-
-class YourColorListState extends State<YourColorList> {
-  List<YourColor> feelList = [];
+  final List<YourColor> feelList;
   final outputFormat = DateFormat('yyyy/MM/dd');
-
-  @override
-  void initState() {
-    super.initState();
-
-    setFeelList();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,15 +62,5 @@ class YourColorListState extends State<YourColorList> {
         );
       },
     );
-  }
-
-  Future<void> setFeelList() async {
-    final yourColor = await YourColorRepository.getYourColorByUserID(
-      FirebaseAuth.instance.currentUser!.uid,
-    );
-
-    setState(() {
-      feelList = yourColor;
-    });
   }
 }
