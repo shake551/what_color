@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:what_color/page/component/your_color_list.dart';
 import 'package:what_color/page/navigate.dart';
-import 'package:what_color/widget/your_color_list.dart';
 
 void main() {
   runApp(const Home());
