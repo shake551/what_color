@@ -26,39 +26,53 @@ class YourColorListWidget extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       itemCount: feelList.length,
       itemBuilder: (BuildContext context, int index) {
-        return Container(
-          margin: const EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            color: Color.fromRGBO(
-              feelList[index].color.r,
-              feelList[index].color.g,
-              feelList[index].color.b,
-              0.8,
+        return Row(
+          children: [
+            Container(
+              width: 30,
+              height: 30,
+              decoration: BoxDecoration(
+                color: Color.fromRGBO(
+                  feelList[index].color.r,
+                  feelList[index].color.g,
+                  feelList[index].color.b,
+                  0.8,
+                ),
+                shape: BoxShape.circle,
+              ),
             ),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          // height: 50,
-          child: Container(
-            padding: const EdgeInsets.all(15),
-            child: Column(
-              children: [
-                Center(
-                  child: Text(
-                    feelList[index].comment,
-                    style: const TextStyle(fontSize: 20),
+            Expanded(
+              child: Container(
+                margin: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Colors.grey,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Container(
+                  padding: const EdgeInsets.all(15),
+                  child: Column(
+                    children: [
+                      Center(
+                        child: Text(
+                          feelList[index].comment,
+                          style: const TextStyle(fontSize: 15),
+                        ),
+                      ),
+                      Container(
+                        width: double.infinity,
+                        margin: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Text(
+                          outputFormat.format(feelList[index].createdAt),
+                          textAlign: TextAlign.right,
+                          style: const TextStyle(fontSize: 10),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                Container(
-                  width: double.infinity,
-                  margin: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Text(
-                    outputFormat.format(feelList[index].createdAt),
-                    textAlign: TextAlign.right,
-                  ),
-                ),
-              ],
+              ),
             ),
-          ),
+          ],
         );
       },
     );
