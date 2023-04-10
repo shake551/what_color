@@ -33,6 +33,7 @@ class MyPageState extends State<MyPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('What Color?'),
+        automaticallyImplyLeading: false,
         actions: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,

@@ -80,17 +80,17 @@ class MyCalendarWidgetState extends State<MyCalendarWidget> {
       rangeSelectionMode: _rangeSelectionMode,
       eventLoader: _getEventsForDay,
       calendarStyle: const CalendarStyle(
-        weekendTextStyle: TextStyle(color: Colors.black),
+        weekendTextStyle: TextStyle(color: Colors.white),
         todayDecoration: BoxDecoration(
-          color: Colors.black26,
+          color: Colors.black87,
           shape: BoxShape.circle,
         ),
         selectedDecoration: BoxDecoration(
-          color: Colors.red,
+          color: Colors.grey,
           shape: BoxShape.circle,
         ),
         markerDecoration: BoxDecoration(
-          color: Colors.green,
+          color: Colors.blueGrey,
           shape: BoxShape.circle,
         ),
       ),
@@ -101,35 +101,35 @@ class MyCalendarWidgetState extends State<MyCalendarWidget> {
       calendarBuilders: CalendarBuilders(
         //日=>赤、土=>青で表示
         dowBuilder: (_, day) {
-          if (day.weekday == DateTime.sunday) {
-            final text = DateFormat.E('ja').format(day);
-            return Center(
-              child: Text(
-                text,
-                style: const TextStyle(color: Colors.red),
-              ),
-            );
-          }
-          if (day.weekday == DateTime.saturday) {
-            final text = DateFormat.E('ja').format(day);
-            return Center(
-              child: Text(
-                text,
-                style: const TextStyle(color: Colors.blue),
-              ),
-            );
-          }
-          if (day.weekday != DateTime.saturday ||
-              day.weekday != DateTime.sunday) {
-            final text = DateFormat.E('ja').format(day);
-            return Center(
-              child: Text(
-                text,
-                style: const TextStyle(color: Colors.black),
-              ),
-            );
-          }
-          return null;
+          // if (day.weekday == DateTime.sunday) {
+          //   final text = DateFormat.E('ja').format(day);
+          //   return Center(
+          //     child: Text(
+          //       text,
+          //       style: const TextStyle(color: Colors.red),
+          //     ),
+          //   );
+          // }
+          // if (day.weekday == DateTime.saturday) {
+          //   final text = DateFormat.E('ja').format(day);
+          //   return Center(
+          //     child: Text(
+          //       text,
+          //       style: const TextStyle(color: Colors.blue),
+          //     ),
+          //   );
+          // }
+          // if (day.weekday != DateTime.saturday ||
+          //     day.weekday != DateTime.sunday) {
+          final text = DateFormat.E('ja').format(day);
+          return Center(
+            child: Text(
+              text,
+              style: const TextStyle(color: Colors.white),
+            ),
+          );
+          // }
+          // return null;
         },
       ),
     );

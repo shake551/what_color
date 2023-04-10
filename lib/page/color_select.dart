@@ -42,7 +42,9 @@ class ColorSelectState extends State<ColorSelect> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('複数選択できるタグ')),
+      appBar: AppBar(
+        title: const Text('What Color?'),
+      ),
       body: Column(
         children: [
           Expanded(

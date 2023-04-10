@@ -11,19 +11,18 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('What Color?'),
-        ),
-        body: Column(
-          children: const [
-            Expanded(
-              child: YourColorList(),
-            ),
-            Navigate(),
-          ],
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('What Color?'),
+        automaticallyImplyLeading: false,
+      ),
+      body: Column(
+        children: const [
+          Expanded(
+            child: YourColorList(),
+          ),
+          Navigate(),
+        ],
       ),
     );
   }
