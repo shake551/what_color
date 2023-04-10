@@ -10,11 +10,13 @@ environment:
 dependencies:
   build_runner: ^2.3.3
   cloud_firestore: ^4.4.5
+  collection: ^1.17.0
   cupertino_icons: ^1.0.2
   firebase_auth: ^4.3.0
   firebase_core: ^2.8.0
   flutter:
     sdk: flutter
+  flutter_riverpod: ^2.3.4
   freezed: ^2.3.2
   freezed_annotation: ^2.2.0
 
@@ -25,6 +27,7 @@ dependencies:
   intl: ^0.17.0
   json_annotation: ^4.8.0
   json_serializable: ^6.6.1
+  table_calendar: ^3.0.8
   very_good_analysis: ^4.0.0+1
 
 dev_dependencies:
