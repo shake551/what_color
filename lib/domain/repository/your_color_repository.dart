@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 import 'package:what_color/domain/model/color_base.dart';
 import 'package:what_color/domain/model/your_color.dart';
 
@@ -38,5 +39,28 @@ class YourColorRepository {
         .get();
 
     return YourColor.fromFirestoreList(snapshot.docs);
+  }
+
+  static Future<Map<DateTime, List<YourColor>>> getYourColorForCalendar(
+    String userID,
+  ) async {
+    final outputFormat = DateFormat('yyyy-MM-dd');
+    final yourColorList = await getYourColorByUserID(userID);
+
+    final groupedMap = <String, List<YourColor>>{};
+    for (final element in yourColorList) {
+      if (groupedMap.containsKey(outputFormat.format(element.createdAt))) {
+        groupedMap[outputFormat.format(element.createdAt)]!.add(element);
+      } else {
+        groupedMap[outputFormat.format(element.createdAt)] = [element];
+      }
+    }
+
+    final yourColorCalendarMap = <DateTime, List<YourColor>>{};
+    for (final mapKey in groupedMap.keys) {
+      yourColorCalendarMap[DateTime.parse(mapKey)] = groupedMap[mapKey]!;
+    }
+
+    return yourColorCalendarMap;
   }
 }
