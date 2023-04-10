@@ -1,13 +1,16 @@
+import 'dart:collection';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:what_color/domain/model/your_color_calendar.dart';
-import 'package:what_color/widget/calendar/util.dart';
+import 'package:what_color/domain/model/your_color.dart';
+import 'package:what_color/domain/repository/your_color_repository.dart';
 
 class MyCalendarWidget extends StatefulWidget {
   const MyCalendarWidget({required this.updateSelectedCalendarList, super.key});
 
-  final Function(List<YourColorCalendar>) updateSelectedCalendarList;
+  final Function(List<YourColor>) updateSelectedCalendarList;
 
   @override
   MyCalendarWidgetState createState() => MyCalendarWidgetState();
@@ -20,11 +23,25 @@ class MyCalendarWidgetState extends State<MyCalendarWidget> {
   DateTime? _rangeStart;
   DateTime? _rangeEnd;
 
+  final kEvents = LinkedHashMap<DateTime, List<YourColor>>(
+    equals: isSameDay,
+    hashCode: getHashCode,
+  );
+
   @override
   void initState() {
     super.initState();
 
     _selectedDay = _focusedDay;
+    Future(() async {
+      final yourColorList = await YourColorRepository.getYourColorForCalendar(
+        FirebaseAuth.instance.currentUser!.uid,
+      );
+
+      setState(() {
+        kEvents.addAll(yourColorList);
+      });
+    });
   }
 
   @override
@@ -32,7 +49,7 @@ class MyCalendarWidgetState extends State<MyCalendarWidget> {
     super.dispose();
   }
 
-  List<YourColorCalendar> _getEventsForDay(DateTime day) {
+  List<YourColor> _getEventsForDay(DateTime day) {
     return kEvents[day] ?? [];
   }
 
@@ -49,7 +66,7 @@ class MyCalendarWidgetState extends State<MyCalendarWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return TableCalendar<YourColorCalendar>(
+    return TableCalendar<YourColor>(
       locale: 'ja_JP',
       headerStyle: const HeaderStyle(
         formatButtonVisible: false,
@@ -117,4 +134,12 @@ class MyCalendarWidgetState extends State<MyCalendarWidget> {
       ),
     );
   }
+}
+
+final kToday = DateTime.now();
+final kFirstDay = DateTime(kToday.year, kToday.month - 6, kToday.day);
+final kLastDay = DateTime(kToday.year, kToday.month, kToday.day);
+
+int getHashCode(DateTime key) {
+  return key.day * 1000000 + key.month * 10000 + key.year;
 }

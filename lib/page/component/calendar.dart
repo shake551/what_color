@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:what_color/domain/model/your_color_calendar.dart';
+import 'package:what_color/domain/model/your_color.dart';
 import 'package:what_color/notifier/calendar_your_color.dart';
 import 'package:what_color/widget/calendar/my_calendar_widget.dart';
 import 'package:what_color/widget/your_color_list_widget.dart';
 
 final calendarYourColorProvider =
-    StateNotifierProvider<CalendarYourColorNotifier, List<YourColorCalendar>>(
+    StateNotifierProvider<CalendarYourColorNotifier, List<YourColor>>(
   (ref) => CalendarYourColorNotifier(),
 );
 
@@ -39,7 +39,7 @@ class MyCalendarWidgetConsumer extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return MyCalendarWidget(
-      updateSelectedCalendarList: (List<YourColorCalendar> yourColorList) => {
+      updateSelectedCalendarList: (List<YourColor> yourColorList) => {
         ref.read(calendarYourColorProvider.notifier).changeState(yourColorList),
       },
     );
@@ -52,9 +52,7 @@ class YourColorListWidgetConsumer extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return YourColorListWidget(
-      feelList: YourColorCalendar.toYourColorList(
-        ref.watch(calendarYourColorProvider),
-      ),
+      feelList: ref.watch(calendarYourColorProvider),
     );
   }
 }
