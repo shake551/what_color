@@ -31,6 +31,15 @@ class YourColor with _$YourColor {
     return yourColorList;
   }
 
+  static List<dynamic> toJsonList(List<YourColor> yourColorList) {
+    final jsonList = <dynamic>[];
+    for (final ele in yourColorList) {
+      jsonList.add(ele.toJson());
+    }
+
+    return jsonList;
+  }
+
   static YourColor fromFirestore(QueryDocumentSnapshot firestore) {
     final firestoreData = firestore.data()! as Map<String, dynamic>;
     firestoreData['id'] = firestore.id;
