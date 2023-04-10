@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:what_color/marker_cluster/color_map.dart';
 import 'package:what_color/page/home.dart';
+import 'package:what_color/page/my_page.dart';
 
 void main() => runApp(const MyApp());
 
@@ -28,7 +29,7 @@ class _FooterState extends State<Footer> {
   List<Widget> display = [
     const ColorMap(),
     const Home(),
-    const Home(),
+    const MyPage(),
   ];
 
   late int selectedIndex = widget.param;
