@@ -45,7 +45,7 @@ class YourColorListWidget extends StatelessWidget {
               child: Container(
                 margin: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  color: Colors.grey,
+                  color: Colors.black87,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Container(
@@ -55,7 +55,10 @@ class YourColorListWidget extends StatelessWidget {
                       Center(
                         child: Text(
                           feelList[index].comment,
-                          style: const TextStyle(fontSize: 15),
+                          style: const TextStyle(
+                            fontSize: 15,
+                            color: Colors.grey,
+                          ),
                         ),
                       ),
                       Container(
@@ -64,7 +67,10 @@ class YourColorListWidget extends StatelessWidget {
                         child: Text(
                           outputFormat.format(feelList[index].createdAt),
                           textAlign: TextAlign.right,
-                          style: const TextStyle(fontSize: 10),
+                          style: const TextStyle(
+                            fontSize: 10,
+                            color: Colors.grey,
+                          ),
                         ),
                       ),
                     ],

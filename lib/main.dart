@@ -18,9 +18,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'Flutter Demo',
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+    return MaterialApp(
+      title: 'What Color?',
+      theme: ThemeData(
+        brightness: Brightness.dark,
+        primaryColor: Colors.blueGrey,
+        primarySwatch: Colors.grey,
+      ),
+      home: const MyHomePage(title: 'What Color?'),
     );
   }
 }
@@ -61,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text(
-              'What color',
+              'What color?',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 50,

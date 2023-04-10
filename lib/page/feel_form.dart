@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:what_color/domain/model/color_base.dart';
 import 'package:what_color/domain/repository/your_color_repository.dart';
-import 'package:what_color/page/home.dart';
+import 'package:what_color/page/component/footer.dart';
 
 class FeelForm extends StatefulWidget {
   const FeelForm({this.selectedColors, super.key});
@@ -21,7 +21,9 @@ class FeelFormState extends State<FeelForm> {
   Widget build(BuildContext context) {
     final colorAverage = ColorBase.averageColor(widget.selectedColors);
     return Scaffold(
-      appBar: AppBar(title: const Text('what color?')),
+      appBar: AppBar(
+        title: const Text('What Color?'),
+      ),
       resizeToAvoidBottomInset: false,
       body: Padding(
         padding: const EdgeInsets.all(30),
@@ -54,6 +56,9 @@ class FeelFormState extends State<FeelForm> {
                 minLines: 6,
                 keyboardType: TextInputType.multiline,
                 cursorColor: Colors.black,
+                style: const TextStyle(
+                  color: Colors.black,
+                ),
                 decoration: InputDecoration(
                   fillColor: Colors.grey,
                   filled: true,
@@ -103,7 +108,7 @@ class FeelFormState extends State<FeelForm> {
                     await Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const Home(),
+                        builder: (context) => const Footer(),
                       ),
                     );
                   },

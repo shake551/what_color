@@ -8,7 +8,13 @@ class Navigate extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: ElevatedButton(
-        child: const Text('次へ'),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.black,
+        ),
+        child: const Text(
+          '次へ',
+          style: TextStyle(color: Colors.grey),
+        ),
         onPressed: () {
           Navigator.push(
             context,
