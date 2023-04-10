@@ -30,10 +30,7 @@ class ColorMapState extends State<ColorMap> {
   late StreamSubscription<Position> positionStream;
 
   //初期位置
-  final CameraPosition _kGooglePlex = const CameraPosition(
-    target: LatLng(43.0686606, 141.3485613),
-    zoom: 14,
-  );
+  late CameraPosition _kGooglePlex;
 
   final LocationSettings locationSettings = const LocationSettings(
     accuracy: LocationAccuracy.high,
@@ -68,6 +65,13 @@ class ColorMapState extends State<ColorMap> {
                   '${position.longitude}',
         );
       }
+
+      setState(() {
+        _kGooglePlex = CameraPosition(
+          target: LatLng(position!.latitude, position.longitude),
+          zoom: 14,
+        );
+      });
     });
 
     super.initState();
