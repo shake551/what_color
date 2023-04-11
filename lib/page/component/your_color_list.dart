@@ -13,6 +13,7 @@ class YourColorList extends StatefulWidget {
 
 class YourColorListState extends State<YourColorList> {
   List<YourColor> feelList = [];
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -23,6 +24,18 @@ class YourColorListState extends State<YourColorList> {
 
   @override
   Widget build(BuildContext context) {
+    if (isLoading) {
+      return Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              CircularProgressIndicator(),
+            ],
+          ),
+        ),
+      );
+    }
     return YourColorListWidget(feelList: feelList);
   }
 
@@ -33,6 +46,7 @@ class YourColorListState extends State<YourColorList> {
 
     setState(() {
       feelList = yourColor;
+      isLoading = false;
     });
   }
 }
