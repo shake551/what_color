@@ -6,22 +6,11 @@ class YourColorListWidget extends StatelessWidget {
   YourColorListWidget({required this.feelList, super.key});
 
   final List<YourColor> feelList;
+  final isLoading = true;
   final outputFormat = DateFormat('yyyy/MM/dd');
 
   @override
   Widget build(BuildContext context) {
-    if (feelList.isEmpty) {
-      return Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              CircularProgressIndicator(),
-            ],
-          ),
-        ),
-      );
-    }
     return ListView.builder(
       padding: const EdgeInsets.all(8),
       itemCount: feelList.length,
