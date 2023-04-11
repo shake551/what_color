@@ -37,6 +37,8 @@ class ColorMapState extends State<ColorMap> {
     distanceFilter: 100,
   );
 
+  bool isLoading = true;
+
   @override
   void initState() {
     //位置情報が許可されていない時に許可をリクエストする
@@ -81,6 +83,7 @@ class ColorMapState extends State<ColorMap> {
     final yourColorList = await YourColorRepository.getYourColor();
     setState(() {
       items = ClusterPlace.fromYourColorList(yourColorList);
+      isLoading = false;
     });
   }
 
@@ -110,7 +113,7 @@ class ColorMapState extends State<ColorMap> {
 
   @override
   Widget build(BuildContext context) {
-    if (items.isEmpty) {
+    if (isLoading) {
       return Scaffold(
         body: Center(
           child: Column(
