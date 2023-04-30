@@ -40,6 +40,7 @@ class MyCalendarWidgetState extends State<MyCalendarWidget> {
 
       setState(() {
         kEvents.addAll(yourColorList);
+        widget.updateSelectedCalendarList(_getEventsForDay(_selectedDay!));
       });
     });
   }
