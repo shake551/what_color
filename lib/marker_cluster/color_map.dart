@@ -92,7 +92,8 @@ class ColorMapState extends State<ColorMap> {
       items,
       _updateMarkers,
       markerBuilder: _markerBuilder,
-      levels: const [1, 3, 6, 9, 12, 15],
+      // levels: const [1, 3, 6, 9, 12, 15],
+      levels: const [1, 3, 5, 7, 9, 11, 13, 15],
     );
   }
 
@@ -161,7 +162,7 @@ class ColorMapState extends State<ColorMap> {
 
     final paint = Paint();
 
-    final size = 20 * count.toDouble();
+    final size = 50 * count.toDouble();
 
     paint.color = Colors.transparent;
     final rect = Rect.fromLTWH(0, 0, size, size);
