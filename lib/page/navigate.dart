@@ -10,10 +10,15 @@ class Navigate extends StatelessWidget {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.black,
+          shape: const CircleBorder(
+            side: BorderSide(
+              width: 5,
+            ),
+          ),
         ),
-        child: const Text(
-          '次へ',
-          style: TextStyle(color: Colors.grey),
+        child: const Icon(
+          Icons.add,
+          color: Colors.grey,
         ),
         onPressed: () {
           Navigator.push(
